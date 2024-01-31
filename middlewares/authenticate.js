@@ -29,6 +29,8 @@ module.exports = tryCatch(async (req, res, next) => {
   //exclude the password
   delete result.password;
 
+  //add role
+  result.role = t_code ? "teacher" : "student";
   //replace the request by result next middleware will use this values
   req.user = result;
   console.log(result);

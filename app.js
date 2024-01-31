@@ -6,16 +6,18 @@ const notFound = require("./middlewares/notFound");
 const errorMiddleware = require("./middlewares/error");
 const authRoute = require("./routes/auth-route");
 const authenticate = require("./middlewares/authenticate");
+const homeworkRoute = require("./routes/homework-routes");
+const subjectRoute = require("./routes/subject-route");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+//service api
 app.use("/auth", authRoute);
-app.use("/user-only", authenticate, (req, res, next) => {
-  res.json({ msg: req.user.firstname });
-});
+app.use("/homework", homeworkRoute);
+app.use("/subject", subjectRoute);
 
 app.use(notFound);
 app.use(errorMiddleware); //err ต้องอยู่ตัวสุดท้าย
